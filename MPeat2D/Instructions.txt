@@ -1,0 +1,9 @@
+To run MPeat2D model
+
+1. Put all file in the same folder.
+2. Run the input data rain.m for the net rainfall rate and temperature.m for the annual air temperature. 
+   Those data can be obtained from field measurements or simulation model.  
+3. Run the main file MPeat2D.m. 
+   Running time depend on the computer performance and  simulation time of the model.  
+
+We provide the example of plotting the results through plotresult.m that requires the input data from xplot.m, yplot.m, and variableplot.m
