@@ -572,8 +572,8 @@ class Ui_MainWindowSusi(object):
         #print (self.spara[site])
         #print ('********************')
   
-        v_ini, v, iv, cbt, dcbt, cb, dcb,  w, dw, logs, pulp, dv, dlogs, dpulp, yrs, bmgr,Nleach, \
-                        Pleach, Kleach, DOCleach, runoff = run_susi(forc, wpara, cpara, 
+        v_ini, v, iv, cbt, dcbt, cb, dcb, w, dw, logs, pulp, dv, dlogs, dpulp, yrs, bmgr, Nleach, \
+                        Pleach, Kleach, DOCleach, runoff, nrelease, prelease, krelease, ch4release = run_susi(forc, wpara, cpara, 
                         org_para, self.spara[site], self.outpara, photopara, syr, eyr, wlocation = 'undefined', 
                         mottifile=mottifile, peat= 'other', photosite='All data', 
                         folderName=folderName,ageSim=ageSim, sarkaSim=sarkaSim, sfc=self.spara[site]['sfc'], susiPath=susiPath, kaista=kaista)
@@ -630,25 +630,25 @@ class Ui_MainWindowSusi(object):
         dyi= [yi[k]-yi[0] for k in range(4)]
         dg = [(yi[k]-yi[0])/(eyr-syr + 1) for k in range(4)]
         fs=12
-        fig = plt.figure(num='Susi - skenaariot', figsize=[15.,8.], facecolor='#C1ECEC')  #see hex color codes from https://www.rapidtables.com/web/color/html-color-codes.html
+        fig = plt.figure(num='SUSI - Scenarios', figsize=[15.,8.], facecolor='#C1ECEC')  #see hex color codes from https://www.rapidtables.com/web/color/html-color-codes.html
         plt.subplot(221)
         plt.plot(-np.array(dd), np.array(w))
-        plt.xlabel('Ojan syvyys [m]')
-        plt.ylabel('Pohaveden syvyys, kesä [m]')
+        plt.xlabel('Ditch depth [m]')
+        plt.ylabel('Groundwater depth, summer [m]')
         plt.subplot(222)
         plt.plot(-np.array(dd), np.array(dyi))
-        plt.xlabel('Ojan syvyys [m]')
-        plt.ylabel('Lisätuotos [$m^{3}$ $ha^{-1}$]')
+        plt.xlabel('Ditch depth [m]')
+        plt.ylabel('Additional yield [$m^{3}$ $ha^{-1}$]')
         plt.subplot(223)
         plt.plot(-np.array(dd), np.array(dg))
-        plt.xlabel('Ojan syvyys [m]')
-        plt.ylabel('Lisäkasvu [$m^{3}$ $ha^{-1}$ $a^{-1}$]')
+        plt.xlabel('Ditch depth [m]')
+        plt.ylabel('Additional growth [$m^{3}$ $ha^{-1}$ $yr^{-1}$]')
         plt.subplot(224)
         plt.plot(-np.array(dd), np.array(npv2), label='i=2%')
         plt.plot(-np.array(dd), np.array(npv3), label='i=3%')
         plt.plot(-np.array(dd), np.array(npv4), label='i=4%')
-        plt.xlabel('Ojan syvyys [m]')
-        plt.ylabel('Nettonykyarvo [€ $ha^{-1}$]')
+        plt.xlabel('Ditch depth [m]')
+        plt.ylabel('Net present value [€ $ha^{-1}$]')
         plt.legend(loc='best')
         plt.show()        
         

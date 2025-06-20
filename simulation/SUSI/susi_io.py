@@ -422,7 +422,7 @@ def fig_stand_growth_node_bck(r, rounds, ageSim, start_yr, end_yr, ageToVol, age
 def fig_stand_growth_node(rounds, ageSim, start_yr, end_yr, ageToVol, agearray,vols, name, dwts):
     sns.set()
     
-    fig=plt.figure(num='Susi-tulokset',  facecolor=(232/255.0, 243/255.0, 245.0/255), edgecolor='k', figsize=(18.0,9.0))    
+    fig=plt.figure(num='SUSI Results',  facecolor=(232/255.0, 243/255.0, 245.0/255), edgecolor='k', figsize=(18.0,9.0))    
     gr_limit = 0.15   #allowed difference from table growth    
         
     fig = plt.subplot(211)
@@ -681,8 +681,8 @@ def motti_fig(df, ini_age, sim_time):
     ax= plt.subplot(234)
     ax.plot(df['age'], df['vol'], color='green')
     ax.axvspan(ini_age, ini_age+sim_time, color='red', alpha=0.3)        
-    plt.ylabel('Tilavuus [$m^{3}$ $ha^{-1}$]')
-    #plt.xlabel('Age, yrs')
+    plt.ylabel('Volume [$m^{3}$ $ha^{-1}$]')
+    plt.xlabel('Age, years')
 
     ax= plt.subplot(235)
     ax.plot(df['age'], df['Dg'], color='green')
