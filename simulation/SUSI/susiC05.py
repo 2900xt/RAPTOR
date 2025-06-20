@@ -510,11 +510,10 @@ class Ui_MainWindowSusi(object):
     def call_susi(self):
         mottifile =  str(self.lineEditMottiTiedosto.text()) 
         ageSim= float(self.lineEditAge.text()) 
-        folderName= str(self.lineEditWorkFolder.text())  #'C:\Apps\WinPython-64bit-2.7.10.3\susi_5_1\outputs\\'
-        #susiPath = 'C:\Apps\WinPython-64bit-2.7.10.3\susi_5_1\\'
+        folderName= str(self.lineEditWorkFolder.text())
         susiPath = os.getcwd()
-        self.outpara['outfolder']=folderName + '\\'
-        wdata= str(self.lineEditWeatherFile.text())  #'C:\Apps\WinPython-64bit-2.7.10.3\susi_5_1\\wfiles\\Lohja_weather.csv'  
+        self.outpara['outfolder'] = os.path.join(folderName, '')  # Empty string to ensure trailing separator
+        wdata= str(self.lineEditWeatherFile.text())
         syr = int(self.spinBoxStartYr.value())
         eyr = int(self.spinBoxEndYr.value())        
         start_date = datetime.datetime(syr,1,1); end_date=datetime.datetime(eyr,12,31)        
@@ -526,7 +525,7 @@ class Ui_MainWindowSusi(object):
         ini_para={}
         ini_para['start_yr']=self.spinBoxStartYr.value()
         ini_para['end_yr']=self.spinBoxEndYr.value()
-        ini_para['sitetype']= self.comboBoxSitePara.currentText() #self.spara['sitetype']['sfc'] #2 #Here Mtkg....Ptkg
+        ini_para['sitetype']= self.comboBoxSitePara.currentText()
         ini_para['iniage']=float(self.lineEditAge.text())
         ini_para['strip_width']=float(self.lineEditStripWidth.text())
             
@@ -540,9 +539,9 @@ class Ui_MainWindowSusi(object):
         
         self.spara[site]['L']=strip_w
         
-        with open(susiPath+'\\paras.pickle', 'wb') as handle:
+        with open(os.path.join(susiPath, 'paras.pickle'), 'wb') as handle:
             pickle.dump(self.spara[site], handle, protocol=pickle.HIGHEST_PROTOCOL)
-        with open(susiPath+'\\inipara.pickle', 'wb') as handle:
+        with open(os.path.join(susiPath, 'inipara.pickle'), 'wb') as handle:
             pickle.dump(ini_para, handle, protocol=pickle.HIGHEST_PROTOCOL)
         #run_susi(forc, self.spara[site], self.outpara, syr, eyr, wlocation = 'undefined', mottifile=mottifile, peat= 'other', photosite='All data', 
         #         folderName=folderName, vonP_lyr='vp27', ageSim=ageSim, sarkaSim=strip_w, sfc=sfc, susiPath=susiPath)
@@ -726,13 +725,13 @@ class Ui_MainWindowSusi(object):
     def ini_para(self):
         susiPath = os.getcwd()
         try:
-            with open(susiPath+'\\paras.pickle', 'rb') as handle:
+            with open(os.path.join(susiPath, 'paras.pickle'), 'rb') as handle:
                 self.spara['previous simulation'] = pickle.load(handle)        
             self.comboBoxSitePara.addItem('aiempi simulaatio')
         except:
-            print ('No previous parameterfile in ', susiPath)
+            print('No previous parameterfile in', susiPath)
         try:
-            with open(susiPath+'\\inipara.pickle', 'rb') as handle:
+            with open(os.path.join(susiPath, 'inipara.pickle'), 'rb') as handle:
                 ini = pickle.load(handle)        
             self.spinBoxStartYr.setValue(int(ini['start_yr']))
             self.spinBoxEndYr.setValue(int(ini['end_yr']))
@@ -743,7 +742,7 @@ class Ui_MainWindowSusi(object):
             self.lineEditStripWidth.setText(str(ini['strip_width']))
             self.comboBoxSitePara.setCurrentText(ini['site'])
         except:
-            print ('No previous initial values in',  susiPath, '\inipara.pickle')
+            print('No previous initial values in', susiPath, 'inipara.pickle')
             
     def show_outpara(self, outpara):        
         pass

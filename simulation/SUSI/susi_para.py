@@ -5,6 +5,7 @@ Created on Mon May 21 18:40:35 2018
 @author: lauren
 """
 import numpy as np
+import os
 
 
 def get_susi_para(wlocation=None, peat=None, photosite='All data', folderName=None, hdomSim=None, volSim=None, 
@@ -17,7 +18,7 @@ def get_susi_para(wlocation=None, peat=None, photosite='All data', folderName=No
     wpara ={
 
         'undefined': {
-        'infolder': susiPath + '\\wfiles\\',
+        'infolder': os.path.join(susiPath, 'wfiles'),
         'infile_d':'Tammela_weather_1.csv',
         'start_yr': 1980, 'end_yr': 1984, 
         'description': 'Undefined, Finland',
